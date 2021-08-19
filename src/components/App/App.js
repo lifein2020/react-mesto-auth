@@ -5,6 +5,8 @@ import Card from '../Card/Card';
 import ImagePopup from '../ImagePopup/ImagePopup';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import {useState, useEffect} from 'react';
+import kusto from '../../images/kusto.jpg';
+import api from '../../utils/Api';
 
 function App() {
 
@@ -29,12 +31,36 @@ function App() {
     setEditAvatarOpen(false);
   }
 
+  const [userName, setUserName] = useState('Жак-Ив Кусто');
+  const [userDescription, setUserDescription] = useState('Исследователь океана');
+  const [userAvatar, setUserAvatar] = useState(kusto);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+      api.getAboutUserInfo()
+      .then((res) => {
+          setUserName(res.name);
+          setUserDescription(res.about);
+          setUserAvatar(res.avatar);
+      });
+      api.getAboutCardsInfo()
+      .then((data) => {
+        setCards(data);
+      });
+  }, [])
+
 
   return (
     <>
     <div className="page">
       <Header />
-      <Main onEditProfile = {handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}/>
+      <Main onEditProfile={handleEditProfileClick} 
+            onAddPlace={handleAddPlaceClick} 
+            onEditAvatar={handleEditAvatarClick} 
+            name={userName} 
+            description={userDescription} 
+            avatar={userAvatar}/>
+
       <Footer />
     </div>
     <Card />
