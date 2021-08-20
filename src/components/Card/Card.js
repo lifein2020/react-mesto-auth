@@ -1,4 +1,4 @@
-function Card(card) {
+function Card({link, name}) {
 
     /*const handleCardClick = () => {
         onCardClick(card);
@@ -6,13 +6,13 @@ function Card(card) {
 
     return (
             <article className="element">
-                <img className="element__image" src={card.link} alt={card.name} /*onClick={handleCardClick}8*/ />
+                <img className="element__image" src={link} alt={name} /*onClick={handleCardClick}8*/ />
                 <button className="element__trash" type="button"></button>
                 <div className="element__text">
-                    <h2 className="element__title">{card.name}</h2>
+                    <h2 className="element__title">{name}</h2>
                     <div className="element__group">
                         <button className="element__like" type="button"></button>
-                        <div className="element__count">{card.likes.length}</div>
+                        <div className="element__count"></div>
                     </div>
                 </div>
             </article>
