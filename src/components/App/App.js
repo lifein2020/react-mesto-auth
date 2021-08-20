@@ -25,30 +25,14 @@ function App() {
     setEditAvatarOpen(true);
   }
 
+  const [selectedCard, setSelectedCard] = useState(false);
+
   const handleAllPopupsClose = () => {
     setEditProfileOpen(false);
     setAddPlacePopupOpen(false);
     setEditAvatarOpen(false);
+    setSelectedCard(null);
   }
-
-  const [userName, setUserName] = useState('Жак-Ив Кусто');
-  const [userDescription, setUserDescription] = useState('Исследователь океана');
-  const [userAvatar, setUserAvatar] = useState(kusto);
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-      api.getAboutUserInfo()
-      .then((res) => {
-          setUserName(res.name);
-          setUserDescription(res.about);
-          setUserAvatar(res.avatar);
-      });
-      api.getAboutCardsInfo()
-      .then((data) => {
-        setCards(data);
-      });
-  }, [])
-
 
   return (
     <>
@@ -57,14 +41,12 @@ function App() {
       <Main onEditProfile={handleEditProfileClick} 
             onAddPlace={handleAddPlaceClick} 
             onEditAvatar={handleEditAvatarClick} 
-            name={userName} 
-            description={userDescription} 
-            avatar={userAvatar}/>
-
+            onCardClick={setSelectedCard}
+      />
       <Footer />
     </div>
-    <Card />
-    <ImagePopup />
+
+    <ImagePopup card={selectedCard} onClose={handleAllPopupsClose} />
 
     <PopupWithForm name="edit" title="Редактировать профиль" button="save" titleButton="Сохранить" isOpen={isEditProfileOpen} onClose={handleAllPopupsClose}>
       <input type="text" className="popup__input popup__input_user_name" id="name-input" name="name" required placeholder="Имя" value="" minlength="2" maxlength="40" />
