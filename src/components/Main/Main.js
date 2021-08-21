@@ -4,7 +4,6 @@ import pen from '../../images/pen.png';
 import api from '../../utils/Api';
 import Card from '../Card/Card';
 
-
 function Main(props) {
     const [userName, setUserName] = useState('Жак-Ив Кусто');
     const [userDescription, setUserDescription] = useState('Исследователь океана');
@@ -25,6 +24,11 @@ function Main(props) {
         });
     }, [])
    
+    /* Подъем состояния ?
+    function onCardClick(card) {
+        setSelectedCard(card);
+    }*/
+
     return(
         <main className="content">
             <nav className="profile">
@@ -46,15 +50,7 @@ function Main(props) {
 
             <section className="elements">
                 {cards.map(card => {
-                    return <Card 
-                                key={card._id} 
-                                {...card}
-                                /*src={card.link} 
-                                alt={card.name} 
-                                title={card.name}
-                                сount={card.likes.length} */
-                                //onCardClick={onCardClick}
-                            />
+                    return <Card key={card._id} card={card} onCardClick={props.onCardClick} onPreviewPopupOpened={props.onPreviewPopupOpened} />
                 })}
             </section>
         </main>
