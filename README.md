@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Проект 10: Место
+### Обзор
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* Описание проекта
+* Примененные технологии
+* Figma
+* Ссылка  на GitHub Pages
+* Планы по доработке
 
-## Available Scripts
+**Описание проекта**
 
-In the project directory, you can run:
+Mesto: интерактивная страница, где можно менять данные профиля и аватар, куда можно добавлять фотографии, просматривать их, удалять и ставить лайки. У лайков есть счетчик.
+При нажатии на иконку "карандаш" появляется форма для редактирования профиля. При нажатии на аватар - форма редактирования изображения аватара. При нажатии на "+" - форма добавления фотографий. Чтобы посмотреть фотографию в увеличенном виде надо кликнуть по фото. Чтобы удалить свои добавленные фотографии, надо кликнуть по иконку корзины и подтвердить свое действие.
+Данные схраняются на сервере.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Примененные технологии**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+React
 
-### `npm test`
+В верстке соблюдена семантика, именование классов по БЭМ. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+В стилях применялись:
+* адаптивная верстка;
+* гриды;
+* flexbox-верстка;
+* все ссылки и интерактивные элементы имеют состояние наведения :hover (применен эффект плавного перехода при трансформации);
+* все диалоговые окна плавно открываются - проявляются из прозрачности и уходят в неё при закрытии.
+* контентные изображения имеют alt с корректным описанием, соответствующим языку страницы.
 
-### `npm run build`
+**Figma**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* [Ссылки на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1) (https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=14975%3A305)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Ссылка  на GitHub Pages**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+*  https://lifein2020.github.io/mesto/
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
