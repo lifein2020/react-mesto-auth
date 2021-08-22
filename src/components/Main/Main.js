@@ -11,23 +11,18 @@ function Main(props) {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        api.getAboutUserInfo()
-        .then((res) => {
-            setUserName(res.name);
-            setUserDescription(res.about);
-            setUserAvatar(res.avatar);
-        });
-        api.getAboutCardsInfo()
-        .then((dataCards) => {
-            setCards(dataCards);
-            console.log(dataCards)
-        });
+        Promise.all([api.getUserInfo(), api.getCardsInfo()])
+        .then(([userData, cardsArray]) => {
+            setUserName(userData.name);
+            setUserDescription(userData.about);
+            setUserAvatar(userData.avatar);
+            setCards(cardsArray);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
     }, [])
-   
-    /* Подъем состояния ?
-    function onCardClick(card) {
-        setSelectedCard(card);
-    }*/
 
     return(
         <main className="content">
@@ -50,7 +45,7 @@ function Main(props) {
 
             <section className="elements">
                 {cards.map(card => {
-                    return <Card key={card._id} card={card} onCardClick={props.onCardClick} onPreviewPopupOpened={props.onPreviewPopupOpened} />
+                    return <Card key={card._id} card={card} onCardClick={props.onCardClick} />
                 })}
             </section>
         </main>

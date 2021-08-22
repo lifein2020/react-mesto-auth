@@ -2,7 +2,6 @@ function Card(props) {
 
     function handleCardClick() {
         props.onCardClick(props.card);
-        props.onPreviewPopupOpened();
       } 
 
     return (
