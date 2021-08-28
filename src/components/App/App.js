@@ -3,7 +3,12 @@ import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import ImagePopup from '../ImagePopup/ImagePopup';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import api from '../../utils/Api';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import kusto from '../../images/kusto.jpg';
+//import { CardsContext } from '../../contexts/CardsContext';
+//import { CardContext } from '../../contexts/CardContext';
 
 function App() {
 
@@ -37,9 +42,31 @@ function App() {
     setIsPreviewPopupOpened(false);
   }
 
+  const [currentUser, setCurrentUser] = useState({name: 'Жак-Ив Кусто', about: 'Исследователь океана', avatar: kusto});
+  //const [cards, setCards] = useState([]);
+  //const [card, setCard] = useState([]);
+  useEffect(() => {
+    /*Promise.all([api.getUserInfo(), api.getCardsInfo()])
+    .then(([userData, cardsArray]) => {
+      setCurrentUser({name: userData.name, about: userData.about, avatar: userData.avatar});
+      setCards(cardsArray);
+    })*/
+    api.getUserInfo()
+    .then((userData) => {
+      setCurrentUser({name: userData.name, about: userData.about, avatar: userData.avatar});
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, []);
+
+//<CardsContext.Provider value={cards}> 
+
   return (
     <>
       <div className="page">
+        <CurrentUserContext.Provider value={currentUser}>
+        
         <Header />
         <Main onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
@@ -47,6 +74,8 @@ function App() {
           onCardClick={onCardClick}
         />
         <Footer />
+      
+        </CurrentUserContext.Provider>
       </div>
 
       <ImagePopup card={selectedCard}
@@ -169,6 +198,7 @@ function App() {
         >
         </span>
       </PopupWithForm>
+      
     </>
   )
 }

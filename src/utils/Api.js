@@ -73,7 +73,7 @@ class Api {
   }
 
   // Поставить лайк
-  putLikeCard(id) {
+  /*putLikeCard(id) {
     return fetch(`${this.baseUrl}cards/likes/${id}`, {
       method: 'PUT',
       headers: this.headers
@@ -89,16 +89,16 @@ class Api {
       headers: this.headers
     })
     .then(this._getResponse);
-  }
+  }*/
 
   //-------- 1 вариант рабочий---------
-  /*toggleLikeCard(id, like) {
+  changeLikeCardStatus(id, like) {
     return fetch(`${this.baseUrl}cards/likes/${id}`, {
       method: like ? 'DELETE' : 'PUT', //если карточка уже лайкнута(черный лайк), то удалить лайк, иначе поставить
       headers: this.headers
     })
     .then(this._getResponse);
-  }*/
+  }
 
 }
 
