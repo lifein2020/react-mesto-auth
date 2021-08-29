@@ -3,6 +3,8 @@ import React from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function EditProfilePopup(props) {
+
+    // управляемые компоненты (input)
     const [userName, setUserName] = useState(''); 
     function handleChangeName(e) {
         setUserName(e.target.value);
@@ -35,7 +37,14 @@ function EditProfilePopup(props) {
                 <div className="popup__container popup__container_edit">
                     <button type="button" className="popup__close popup__close_edit"  onClick={props.onClose}></button>
                     <h2 className="popup__title">Редактировать профиль</h2>
-                    <form name="edit" id="formEdit" className="popup__form popup__form_edit" action="#" autoComplete="off" noValidate onSubmit={handleSubmit}>
+                    <form 
+                        name="edit" 
+                        id="formEdit" 
+                        className="popup__form popup__form_edit" 
+                        action="#" autoComplete="off" 
+                        noValidate 
+                        onSubmit={handleSubmit}
+                    >
                         <input
                             type="text"
                             className="popup__input popup__input_user_name"

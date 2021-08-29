@@ -1,6 +1,28 @@
-
+import {useState} from 'react';
+import React from 'react';
 
 function AddPlacePopup(props) {
+
+    // управляемые компоненты (input)
+    const [cardName, setCardName] = useState('');
+    function handleChangeCardName(e) {
+        setCardName(e.target.value);
+    }
+
+    const [cardImage, setCardImage] = useState('');
+    function handleChangeCardImage(e) {
+        setCardImage(e.target.value);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        props.onAddPlace({
+            card_name: cardName, 
+            card_image_link : cardImage,
+        })
+    }
+
     return (
         <>
             <div className={props.isOpen ? `popup popup_type_add-card popup_is-opened` : `popup popup_type_add-card`}>
@@ -13,9 +35,9 @@ function AddPlacePopup(props) {
                         className="popup__form popup__form_add-card" 
                         action="#" 
                         autoComplete="off" 
-                        noValidate
+                        //noValidate
+                        onSubmit={handleSubmit}
                     >
-                        {props.children}
                         <input
                             type="text"
                             className="popup__input popup__input_card_name"
@@ -24,9 +46,10 @@ function AddPlacePopup(props) {
                             autoComplete="off"
                             required
                             placeholder="Название"
-                            value=""
                             minLength="2"
                             maxLength="30"
+                            value={cardName}
+                            onChange={handleChangeCardName}
                         />
                         <span
                             className="popup__error card-name-input-error"
@@ -40,13 +63,14 @@ function AddPlacePopup(props) {
                             autoComplete="on"
                             required
                             placeholder="Ссылка на картинку"
-                            value=""
+                            value={cardImage}
+                            onChange={handleChangeCardImage}
                         />
                         <span
                             className="popup__error card-image-link-input-error"
                         >
                         </span>
-                        <button type="submit" disabled className="popup__button popup__button_disabled">Создать</button>
+                        <button type="submit" className="popup__button popup__button_disabled">Создать</button>
                     </form>
                 </div>
             </div>

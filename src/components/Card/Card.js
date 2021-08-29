@@ -1,11 +1,9 @@
 import React from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-//import { CardContext } from '../../contexts/CardContext';
 
 function Card(props) {
     //Подписываемся на контекст CurrentUserContext
     const currentUser = React.useContext(CurrentUserContext);
-    //const card = React.useContext(CardContext);
 
     //Показать иконку удаления:
     // Определяем, являемся ли мы владельцем текущей карточки
@@ -25,8 +23,6 @@ function Card(props) {
     const cardLikeButtonClassName = (
         `element__like ${isLiked ? 'element__like_active' : 'element__like'}`
     );    
-        
-    
 
     function handleCardClick() {
         props.onCardClick(props.card);
@@ -57,6 +53,3 @@ function Card(props) {
     
 export default Card;
 
-
-//<button className="element__trash" type="button"></button>
-// <button className="element__like" type="button"></button>

@@ -20,7 +20,7 @@ class Api {
   }
 
   // Получение данных всех карточек
-  getCardsInfo() {
+  getCardsList() {
     return fetch(this.baseUrl + 'cards', { // либо `${this.baseUrl}cards` и в результате конкатенации получается https://mesto.nomoreparties.co/v1/cohort-26/cards
       headers: this.headers
     }).then(this._getResponse);
