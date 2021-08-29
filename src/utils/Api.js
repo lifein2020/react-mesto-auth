@@ -39,12 +39,12 @@ class Api {
   }
 
   // Редактирование профиля
-  patchAboutUserInfo({name, job}) {
+  patchUserInfo({userName, userDescription}) {
     return fetch(this.baseUrl + 'users/me', { //`${this.baseUrl}users/me`
       method: 'PATCH',
       body: JSON.stringify({
-        name: name,
-        about: job
+        name: userName,
+        about: userDescription,
       }),
       headers: this.headers
     })
@@ -52,11 +52,11 @@ class Api {
   }
 
   // Смена аватара
-  patchAvatarUser({ avatar_link }) {
+  patchAvatarUser({ avatarUrl }) {
     return fetch(this.baseUrl + 'users/me/avatar', { //`${this.baseUrl}users/me/avatar`
       method: 'PATCH',
       body: JSON.stringify({
-        avatar: avatar_link
+        avatar: avatarUrl
       }),
       headers: this.headers
     })
@@ -64,7 +64,7 @@ class Api {
   }
 
   // Удаление карточки
-  deliteCard(id) {
+  deleteCard(id) {
     return fetch(`${this.baseUrl}cards/${id}`, {
       method: 'DELETE',
       headers: this.headers
