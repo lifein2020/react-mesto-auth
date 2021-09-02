@@ -31,7 +31,7 @@ function EditAvatarPopup(props) {
                         className={`popup__form popup__form_${props.name}`} 
                         action="#" 
                         autoComplete="off" 
-                        noValidate
+                        //noValidate
                         onSubmit={handleSubmit}
                     >
                         <input

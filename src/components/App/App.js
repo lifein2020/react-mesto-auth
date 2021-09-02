@@ -74,7 +74,10 @@ function App() {
     api.changeLikeCardStatus(card._id, isLiked)
     .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   //4.
@@ -82,7 +85,10 @@ function App() {
     api.deleteCard(card._id)
     .then(() => {
         setCards((state) =>  state.filter((c) => c._id !== card._id));
-    });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   //Для компонента EditProfilePopup
@@ -96,10 +102,12 @@ function App() {
         avatar: dataProfile.avatar, // чтобы аватар тоже отображался 
       }) 
     })
+    .then(() => {
+      handleAllPopupsClose();
+    })
     .catch((err) => {
       console.log(err);
-    })
-    handleAllPopupsClose();
+    }) 
   }
 
   //Для компонента EditAvatarPopup
@@ -112,12 +120,12 @@ function App() {
         //чтобы данные профиля тоже отображались 
         name: dataProfile.name, 
         about: dataProfile.about,
-      })
+      });
+      handleAllPopupsClose();
     })
     .catch((err) => {
       console.log(err);
     })
-    handleAllPopupsClose();
   }
 
   //Для компонента AddPlacePopup
@@ -125,11 +133,11 @@ function App() {
     api.postAddCard({ card_name, card_image_link })
     .then(newCard => {
       setCards([newCard, ...cards]);
+      handleAllPopupsClose();
     })
     .catch((err) => {
       console.log(err);
     })
-    handleAllPopupsClose();
   }
 
   return (
@@ -177,14 +185,14 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
           >
           </EditAvatarPopup>
+
+          <ImagePopup card={selectedCard}
+            onClose={handleAllPopupsClose}
+            active={isPreviewPopupOpened}
+          />
+
         </CurrentUserContext.Provider>
       </div>
-
-      <ImagePopup card={selectedCard}
-        onClose={handleAllPopupsClose}
-        active={isPreviewPopupOpened}
-      />
-
     </>
   )
 }

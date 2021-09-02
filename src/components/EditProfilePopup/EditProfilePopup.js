@@ -42,7 +42,7 @@ function EditProfilePopup(props) {
                         id="formEdit" 
                         className="popup__form popup__form_edit" 
                         action="#" autoComplete="off" 
-                        noValidate 
+                        //noValidate 
                         onSubmit={handleSubmit}
                     >
                         <input
