@@ -12,7 +12,7 @@ function PopupWithForm(props) {
                         action="#" 
                         autoComplete="off" 
                         //noValidate
-                        //onSubmit={props.onSubmit}
+                        onSubmit={props.onSubmit}
                     >
                         {props.children}
                         <button type="submit" disabled className={`popup__button popup__${props.button}`}>{props.titleButton}</button>

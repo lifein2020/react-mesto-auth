@@ -100,11 +100,12 @@ function App() {
         name: dataProfile.name, 
         about: dataProfile.about,
         avatar: dataProfile.avatar, // чтобы аватар тоже отображался 
-      }) 
-    })
-    .then(() => {
+      });
       handleAllPopupsClose();
     })
+    /*.then(() => {
+      handleAllPopupsClose();
+    })*/
     .catch((err) => {
       console.log(err);
     }) 
@@ -158,7 +159,7 @@ function App() {
           <EditProfilePopup
           isOpen={isEditProfileOpen}
           onClose={handleAllPopupsClose}
-          currentUser={currentUser}
+          //currentUser={currentUser}
           onUpdateUser={handleUpdateUser}
           >
           </EditProfilePopup>

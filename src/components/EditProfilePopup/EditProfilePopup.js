@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react';
 import React from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function EditProfilePopup(props) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser}) {
 
     // управляемые компоненты (input)
     const [userName, setUserName] = useState(''); 
@@ -28,11 +29,63 @@ function EditProfilePopup(props) {
         // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
         // Передаём значения управляемых компонентов во внешний обработчик
-        props.onUpdateUser({ userName, userDescription });
+        onUpdateUser({ userName, userDescription });
+        // Очищем инпуты после успешного добавления информации
+        setUserName('');
+        setUserDescription('');
     }
 
     return (
-        <>
+        <PopupWithForm
+            name="edit"
+            id="formEdit"
+            title="Редактировать профиль"
+            button="save"
+            titleButton="Сохранить"
+            isOpen={isOpen}
+            onClose={onClose}
+            onSubmit={handleSubmit}
+        >
+            <input
+            type="text"
+            className="popup__input popup__input_user_name"
+            id="name-input"
+            name="name"
+            required
+            placeholder="Имя"
+            minLength="2"
+            maxLength="40"
+            value={userName}
+            onChange={handleChangeName}
+            />
+            <span
+            className="popup__error name-input-error"
+            >
+            </span>
+            <input
+            type="text"
+            className="popup__input popup__input_user_job"
+            id="job-input"
+            name="job"
+            required
+            placeholder="Род занятий"
+            minLength="2"
+            maxLength="200"
+            value={userDescription}
+            onChange={handleChangeDescription}
+            />
+            <span
+            className="popup__error job-input-error"
+            >
+            </span>
+      </PopupWithForm>  
+    )
+}
+
+export default EditProfilePopup;
+
+/*
+<>
             <div className={props.isOpen ? `popup popup_type_edit popup_is-opened` : `popup popup_type_edit`}>
                 <div className="popup__container popup__container_edit">
                     <button type="button" className="popup__close popup__close_edit"  onClick={props.onClose}></button>
@@ -82,7 +135,4 @@ function EditProfilePopup(props) {
                 </div>
             </div>
         </>
-    )
-}
-
-export default EditProfilePopup;
+*/
