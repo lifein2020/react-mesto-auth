@@ -100,12 +100,13 @@ function App() {
         name: dataProfile.name, 
         about: dataProfile.about,
         avatar: dataProfile.avatar, // чтобы аватар тоже отображался 
+        _id: dataProfile._id, //чтобы лайки проставлялись после обновления профиля
       });
+      //handleAllPopupsClose();
+    })
+    .then(() => {
       handleAllPopupsClose();
     })
-    /*.then(() => {
-      handleAllPopupsClose();
-    })*/
     .catch((err) => {
       console.log(err);
     }) 
@@ -121,6 +122,7 @@ function App() {
         //чтобы данные профиля тоже отображались 
         name: dataProfile.name, 
         about: dataProfile.about,
+        _id: dataProfile._id,
       });
       handleAllPopupsClose();
     })

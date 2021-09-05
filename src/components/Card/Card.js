@@ -14,7 +14,6 @@ function Card(props) {
      `element__trash ${isOwn ? 'element__trash_visible' : 'element__trash'}` 
     ); 
   
-
     // Определить, поставили ли мы уже «лайк» этой карточке:
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
     const isLiked = props.card.likes.some(i => i._id === currentUser._id);
@@ -23,6 +22,8 @@ function Card(props) {
     const cardLikeButtonClassName = (
         `element__like ${isLiked ? 'element__like_active' : 'element__like'}`
     );    
+
+    const likeCounter =  props.card.likes.length;
 
     function handleCardClick() {
         props.onCardClick(props.card);
@@ -44,7 +45,7 @@ function Card(props) {
                     <h2 className="element__title">{props.card.name}</h2>
                     <div className="element__group">
                         <button className={cardLikeButtonClassName} type="button" onClick={handleLikeClick}></button>
-                        <div className="element__count"></div>
+                        <div className="element__count">{likeCounter}</div>
                     </div>
                 </div>
             </article>

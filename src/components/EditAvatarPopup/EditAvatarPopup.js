@@ -1,61 +1,55 @@
-//import React from 'react';
-import { useState, useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function EditAvatarPopup(props) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
-    const urlInput = useRef(null);
+    const urlInput = useRef();
 
-    const[userAvatar, setUserAvatar] = useState('https://somewebsite.com/someimage.jpg');
-    
-    function handleChangeUrl() {
-        setUserAvatar(urlInput.current.value); 
-    }
+    //устанавливаем в поле ввода ссылку по умолчанию при открытии попапа
+    useEffect(() => {
+        let currentUrlInput = urlInput.current;
+        currentUrlInput.value = 'https://somewebsite.com/someimage.jpg';
+    }, [isOpen]) 
 
     function handleSubmit(e) {
         e.preventDefault();
     
-        props.onUpdateAvatar({
-          avatarUrl: urlInput.current.value /* Значение инпута, полученное с помощью рефа*/
+        onUpdateAvatar({
+          avatarUrl: urlInput.current.value /* значение инпута, полученное с помощью рефа*/
         });
+        // очищаем инпут после успешного добавления информации
+        urlInput.current.value = '';
       } 
 
     return (
-        <>
-            <div className={props.isOpen ? `popup popup_type_avatar popup_is-opened` : `popup popup_type_avatar`}>
-                <div className="popup__container popup__container_avatar">
-                    <button type="button" className="popup__close popup__close_avatar" onClick={props.onClose}></button>
-                    <h2 className="popup__title">Обновить аватар</h2>
-                    <form 
-                        name="avatar"
-                        id="formAvatar" 
-                        className={`popup__form popup__form_${props.name}`} 
-                        action="#" 
-                        autoComplete="off" 
-                        //noValidate
-                        onSubmit={handleSubmit}
-                    >
-                        <input
-                            type="url"
-                            className="popup__input popup__input_avatar_link"
-                            id="avatar-link-input"
-                            name="avatar_link"
-                            autoComplete="on"
-                            required
-                            placeholder="Ссылка на аватар"
-                            value={userAvatar}
-                            ref={urlInput}
-                            onChange={handleChangeUrl}
-                        />
-                        <span
-                            className="popup__error avatar-link-input-error"
-                        >
-                        </span>
-                        <button type="submit" className="popup__button popup__save">Сохранить</button>
-                    </form>
-                </div>
-            </div>
-        </>
+        <PopupWithForm
+            name="avatar"
+            id="formAvatar"
+            title="Обновить аватар"
+            button="save"
+            titleButton="Сохранить"
+            isOpen={isOpen}
+            onClose={onClose}
+            onSubmit={handleSubmit}
+        >
+            <input
+            type="url"
+            className="popup__input popup__input_avatar_link"
+            id="avatar-link-input"
+            name="avatar_link"
+            autoComplete="on"
+            required
+            placeholder="Ссылка на аватар"
+            //value="https://somewebsite.com/someimage.jpg"
+            ref={urlInput}
+            />
+            <span
+            className="popup__error avatar-link-input-error"
+            >
+            </span>
+        </PopupWithForm>
     )
 }
 
 export default EditAvatarPopup;
+
