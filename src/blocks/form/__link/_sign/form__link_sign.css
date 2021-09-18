@@ -1,0 +1,11 @@
+.form__link_sign {
+    width: 100%;
+    text-decoration: none; 
+    text-align: center;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+}

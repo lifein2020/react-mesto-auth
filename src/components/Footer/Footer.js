@@ -1,9 +1,13 @@
+import { Route } from 'react-router-dom';
+
 function Footer() {
     return (
-        <footer className="footer">
-            <h3 className="footer__title">&copy; 2020 Mesto Russia</h3>
-            <p className="footer__subtitle">Светлана Живцова</p>
-        </footer>
+        <Route path="/">
+            <footer className="footer">
+                <h3 className="footer__title">&copy; 2020 Mesto Russia</h3>
+            </footer>
+        </Route>
+        
     );
 }
     

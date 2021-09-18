@@ -17,7 +17,7 @@ function PopupWithForm(props) { // ({ name, isOpen, onClose, title, id, onSubmit
                     <button type="submit" className={`popup__button popup__${props.button}`}>{props.titleButton}</button>
                 </form>
             </div>
-        ы</div>
+        </div>
     );
   }
 

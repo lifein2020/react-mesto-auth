@@ -1,0 +1,17 @@
+.form__button {
+    margin-top: 216px;
+    padding: 0;
+    width: 100%;
+    min-height: 50px;
+    border: 0;
+    border-radius: 2px;
+    background: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    }
