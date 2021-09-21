@@ -7,8 +7,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
     //устанавливаем в поле ввода ссылку по умолчанию при открытии попапа
     useEffect(() => {
-        let currentUrlInput = urlInput.current;
-        currentUrlInput.value = 'https://somewebsite.com/someimage.jpg';
+        const currentUrlInput = urlInput.current;
+        currentUrlInput.value = '';
     }, [isOpen]) 
 
     function handleSubmit(e) {

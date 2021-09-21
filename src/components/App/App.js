@@ -161,6 +161,16 @@ function App() {
     })
   }
 
+  useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        handleAllPopupsClose();
+      }
+  }
+    document.addEventListener('keydown', closeByEscape)
+    return () => document.removeEventListener('keydown', closeByEscape)
+  }, [])
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('email');
   const history = useHistory();
@@ -175,6 +185,7 @@ function App() {
         setUserEmail(res.data.email);
       }
     })
+    .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -200,16 +211,13 @@ function App() {
         setMessage({ image: success, text: 'Вы успешно зарегистрировались!' });
       } else {
         return
-        //setIsInfoTooltipOpen(true);
-        //setMessage({ image: fail, text: 'Что-то пошло не так! Попробуйте ещё раз.' });
       }
     })
-  //.catch(err => console.log(err));
-  .catch( err => {
-    setIsInfoTooltipOpen(true);
-    setMessage({ image: fail, text: 'Что-то пошло не так! Попробуйте ещё раз.' });
-    }
-  )
+    .catch(err => console.log(err))
+    .finally(() => {
+      setIsInfoTooltipOpen(true);
+      setMessage({ image: fail, text: 'Что-то пошло не так! Попробуйте ещё раз.' });
+    })
   };
 
   const handleLogin = ({ password, email }) => {
@@ -238,32 +246,36 @@ function App() {
     <>
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
-            <Header 
+          <Header 
               onSignOut={onSignOut}
               email={userEmail}
-            />
-          <Switch>
-          <ProtectedRoute 
-            exact 
-            path="/" 
-            loggedIn={loggedIn} 
-            component={Main} 
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            cards={cards}
-            onCardClick={onCardClick}
-            onLikeClick={handleCardLike}
-            onDeleteClick={handleCardDelete}
           />
-          <Route path="/sign-up">
-            <Register onRegister={handleRegister} />
-          </Route>
-          <Route path="/sign-in">
-            <Login onLogin={handleLogin} />
-          </Route>
+          <Switch>
+            <ProtectedRoute 
+              exact 
+              path="/" 
+              loggedIn={loggedIn} 
+              component={Main} 
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              cards={cards}
+              onCardClick={onCardClick}
+              onLikeClick={handleCardLike}
+              onDeleteClick={handleCardDelete}
+            />
+            <Route path="/sign-up">
+              <Register onRegister={handleRegister} />
+            </Route>
+            <Route path="/sign-in">
+              <Login onLogin={handleLogin} />
+            </Route>
+            <Route>
+            {loggedIn ? <Redirect to="/sign-in" /> : <Redirect to="/sign-up" />}
+            </Route>
           </Switch>
-          {loggedIn && <Footer />}
+
+          <Footer />
           
           <EditProfilePopup
           isOpen={isEditProfileOpen}
@@ -301,16 +313,12 @@ function App() {
             active={isPreviewPopupOpened}
           />
 
-        <InfoTooltip 
-          isOpen={isInfoTooltipOpen}
-          onClose={handleAllPopupsClose}
-          message={message}
-        />
+          <InfoTooltip 
+            isOpen={isInfoTooltipOpen}
+            onClose={handleAllPopupsClose}
+            message={message}
+          />
         </CurrentUserContext.Provider>
-        
-        <Route>
-          {loggedIn ? <Redirect to="/sign-in" /> : <Redirect to="/sign-up" />}
-        </Route>
       </div>
     </>
   )

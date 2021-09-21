@@ -8,4 +8,10 @@
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
+    opacity: 1;
+    transition: opacity .1s ease-in;
+}
+
+.form__link_sign:hover {
+    opacity: 0.6;
 }
