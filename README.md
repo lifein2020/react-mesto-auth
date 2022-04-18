@@ -1,10 +1,13 @@
-# Проект 12: Место
+# Место (проект 12)
+
+**Ссылка  на GitHub Pages**
+*  
 ### Обзор
 
 * Описание проекта
+* Ссылка на GitHub Pages
 * Примененные технологии
 * Figma
-* Ссылка  на GitHub Pages
 * Планы по доработке
 
 **Описание проекта**
@@ -32,8 +35,7 @@ React
 
 * [Ссылки на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1) (https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=14975%3A305)
 
-**Ссылка  на GitHub Pages**
-
-*  https://lifein2020.github.io/mesto/
+**Планы по доработке**
+* добавить валидацию форм
 
 

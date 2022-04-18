@@ -166,9 +166,20 @@ function App() {
       if (e.key === 'Escape') {
         handleAllPopupsClose();
       }
-  }
+    }
     document.addEventListener('keydown', closeByEscape)
     return () => document.removeEventListener('keydown', closeByEscape)
+  }, [])
+
+  useEffect(() => {
+    const closeByOverlay = (e) => {
+      if(e.target.classList.contains('popup') || e.target.classList.contains('popup__close')) {
+        handleAllPopupsClose();
+      }
+    }
+    document.addEventListener('click', closeByOverlay)
+    return () => document.removeEventListener('click', closeByOverlay)
+
   }, [])
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -207,16 +218,17 @@ function App() {
       if (dataReg.data._id || dataReg.statusCode !== 400) {
         setUserEmail(dataReg.data.email);
         history.push('/sign-in');
-        setIsInfoTooltipOpen(true);
         setMessage({ image: success, text: 'Вы успешно зарегистрировались!' });
       } else {
         return
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err);
+      setMessage({ image: fail, text: 'Что-то пошло не так! Попробуйте ещё раз.' });
+    })
     .finally(() => {
       setIsInfoTooltipOpen(true);
-      setMessage({ image: fail, text: 'Что-то пошло не так! Попробуйте ещё раз.' });
     })
   };
 
